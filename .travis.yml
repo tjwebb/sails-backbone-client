@@ -5,3 +5,13 @@ node_js:
 
 notifications:
   email: false
+
+deploy:
+  provider: npm
+  email: me@traviswebb.com
+  api_key:
+    secure: pZNESFTeppxgAL2j3Y3/XN6XqVD9NfIMu1lk+Tch0mbNs6jmz7tEttSg7pbeAjlHbXfbou6fxUcyk5sZoiXQFB+7LU4qB2IBUuwrmpymJ5vVdt5t6OD1oZoClT5LZtbsgVegF4LfIFmK1p2VILiTDANGVdL8yv2oyTP4V8fGK74=
+  on:
+    tags: true
+    repo: tjwebb/sails-backbone-client
+    all_branches: true
