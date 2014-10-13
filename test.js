@@ -3,34 +3,71 @@
 var assert = require('assert');
 var path = require('path');
 var SailsApp = require('sails').Sails;
-var SailsBackbone = require('./');
-var Backbone = require('backbone');
-require('backbone-relational');
-require('backbone-validation');
 var _ = require('lodash');
+var BackboneClient;
 
 describe('sails-backbone-client', function () {
+  var url = 'http://localhost:1337/api/v1/backbonemodel';
   var schema;
+  var app = new SailsApp();
+  var xm;
+  var ns = {
+    Account: {
+      foo: function () {
+        return 'bar';
+      },
+      whoami: function () {
+        return this.name;
+      }
+    }
+  };
 
-  describe.skip('REST', function () {
+  var config = {
+    appPath: path.dirname(require.resolve('xtuple-api')),
+    hooks: {
+      grunt: false
+    }
+  };
 
-    it('can make a rest request', function () {
-      // TODO
+  before(function (done) {
+    this.timeout(60 * 1000);
+
+    app.lift(config, function (error, sails) {
+      app = sails;
+
+      var jsdom = require('jsdom');
+      var doc = jsdom.jsdom();
+      global.$ = require('jquery')(doc.parentWindow);
+
+      global.Backbone = require('backbone');
+      global.Backbone.ajax = require('najax');
+      BackboneClient = require('./');
+
+      done(error);
     });
-
   });
 
-  describe.skip('#parse()', function () {
-    var xm;
+  describe('#create()', function () {
+    it('should run without error', function (done) {
+      this.timeout(20 * 1000);
 
-    it('should run without error', function () {
-      xm = SailsBackbone.parse(schema);
-      Backbone.Relational.store.addModelScope(xm);
+      BackboneClient.create(url, ns)
+        .then(function (api) {
+          //console.log(api);
+          xm = api;
+          done();
+        })
+        .catch(function (error) {
+          //console.log(error);
+          done(error);
+        });
+
+      global.Backbone.Relational.store.addModelScope(xm);
     });
-    it('should be fast (t < 20ms) * 100', function () {
+    it.skip('should be fast (t < 20ms) * 100', function () {
       this.timeout(2000);
       for (var i = 0; i < 100; i++) {
-        SailsBackbone.parse(schema);
+        BackboneClient.create(url);
       }
     });
     it('can instantiate new model without error', function () {
@@ -44,17 +81,6 @@ describe('sails-backbone-client', function () {
       assert(account.constructor.__super__.name === 'xTupleObject');
     });
     it('should mixin any existing models of the same name', function () {
-      var ns = {
-        Account: {
-          foo: function () {
-            return 'bar';
-          },
-          whoami: function () {
-            return this.name;
-          }
-        }
-      };
-      var xm = SailsBackbone.parse(schema, ns);
 
       var account = new xm.Account();
       assert(_.isFunction(account.foo));
@@ -63,14 +89,7 @@ describe('sails-backbone-client', function () {
       assert(account.whoami() === xm.Account.prototype.name, account.whoami());
     });
   });
-  describe.skip('#validate()', function () {
-    var xm;
-
-    before(function () {
-      schema = SailsBackbone.generate(app);
-      xm = SailsBackbone.parse(schema);
-    });
-
+  describe('#validate()', function () {
     it('should invalidate an invalid model using default validators', function (done) {
       var role = new xm.Role({
         name: 1,

@@ -27,9 +27,12 @@
     "backbone": "^1.1.2",
     "backbone-relational": "^0.8.8",
     "backbone-validation": "^0.9.1",
-    "bluebird": "^2.3.5"
+    "bluebird": "^2.3.5",
+    "jquery": "^2.1.1"
   },
   "devDependencies": {
-    "hashware-api": "^0.1.12"
+    "hashware-api": "^0.1.12",
+    "jsdom": "^1.0.1",
+    "najax": "^0.1.5"
   }
 }
