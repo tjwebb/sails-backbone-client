@@ -23,8 +23,13 @@
   },
   "homepage": "https://github.com/tjwebb/sails-backbone-client",
   "dependencies": {
+    "anchor": "^0.10.1",
     "backbone": "^1.1.2",
     "backbone-relational": "^0.8.8",
-    "backbone-validation": "^0.9.1"
+    "backbone-validation": "^0.9.1",
+    "bluebird": "^2.3.5"
+  },
+  "devDependencies": {
+    "hashware-api": "^0.1.12"
   }
 }
