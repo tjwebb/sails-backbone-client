@@ -28,7 +28,8 @@
     "backbone-relational": "^0.8.8",
     "backbone-validation": "^0.9.1",
     "bluebird": "^2.3.5",
-    "jquery": "^2.1.1"
+    "jquery": "^2.1.1",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "hashware-api": "^0.1.12",
