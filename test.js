@@ -37,7 +37,7 @@ describe('sails-backbone-client', function () {
 
       var jsdom = require('jsdom');
       var doc = jsdom.jsdom();
-      global.$ = require('jquery')(doc.parentWindow);
+      //global.$ = require('jquery')(doc.parentWindow);
 
       global.Backbone = require('backbone');
       global.Backbone.ajax = require('najax');
