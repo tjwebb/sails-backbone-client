@@ -35,10 +35,6 @@ describe('sails-backbone-client', function () {
     app.lift(config, function (error, sails) {
       app = sails;
 
-      var jsdom = require('jsdom');
-      var doc = jsdom.jsdom();
-      //global.$ = require('jquery')(doc.parentWindow);
-
       global.Backbone = require('backbone');
       global.Backbone.ajax = require('najax');
       BackboneClient = require('./');
@@ -73,6 +69,10 @@ describe('sails-backbone-client', function () {
     it('can instantiate new model without error', function () {
       var account = new xm.Account();
       assert(_.isObject(account));
+    });
+    it('should define Collections for the models', function () {
+      assert(new xm.RoleCollection() instanceof global.Backbone.Collection);
+      assert(new xm.AccountCollection() instanceof global.Backbone.Collection);
     });
     it('should record proper inheritance in the prototype chain', function () {
       assert(xm.Account.__super__.name === 'xTupleObject');
