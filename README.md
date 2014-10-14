@@ -1,4 +1,4 @@
-# <img src="http://cdn.tjw.io/images/sails-logo.png" height='43px' />-backbone
+# <img src="http://cdn.tjw.io/images/sails-logo.png" height='43px' />-backbone-client
 
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-image]][travis-url]
@@ -14,7 +14,7 @@ $ npm install sails-backbone-client --save
 ## Usage
 
 ```js
-var BackboneClient = require('sails-backbone-client-client');
+var BackboneClient = require('sails-backbone-client');
 var api = { };
 BackboneClient.create('localhost/api/v1/backbonemodels', api)
   .then(function (api) {
