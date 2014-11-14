@@ -35,6 +35,6 @@
     "mocha": "^1.21.5",
     "najax": "^0.1.5",
     "sails": "^0.10.5",
-    "xtuple-api": "0.0.18"
+    "xtuple-api": "latest"
   }
 }
