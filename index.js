@@ -1,4 +1,4 @@
-var Backbone = require('backbone');
+var Backbone = global.Backbone || require('backbone');
 var Promise = require('bluebird');
 var parser = require('./lib/parser');
 
@@ -23,7 +23,7 @@ module.exports = {
           }, ns));
         },
         error: function (error) {
-          reject(new Error(error));
+          reject(new Error(JSON.stringify(error)));
         }
       });
     });
