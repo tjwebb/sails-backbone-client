@@ -22,7 +22,7 @@ module.exports = {
             version: '0'
           }, ns));
         },
-        error: function (error) {
+        error: function (collection, error) {
           reject(new Error(JSON.stringify(error)));
         }
       });
