@@ -4,6 +4,12 @@ var _ = require('lodash');
 var Promise = require('bluebird');
 var parser = require('./lib/parser');
 
+var anchorRules = _.transform(require('anchor/lib/match/rules'), function (rules, rule, name) {
+  rules[name] = function (value) {
+    return rule(value) === true ? undefined : 'failed "' + name + '" validation';
+  };
+});
+
 var Backbone = global.Backbone || (global.Backbone = require('backbone'));
 require('backbone-relational');
 require('backbone-validation');
@@ -24,6 +30,10 @@ module.exports = {
     }
 
     Backbone.Relational.showWarnings = false;
+    Backbone.Relational.store.addModelScope(ns);
+
+    _.extend(Backbone.Validation.validators, anchorRules);
+    _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
 
     var ModelCollection = Backbone.Collection.extend({
       url: function () {
@@ -35,7 +45,6 @@ module.exports = {
     return new Promise(function (resolve, reject) {
       collection.fetch({
         success: function (collection, response) {
-          Backbone.Relational.store.addModelScope(ns);
           resolve(_.extend(ns, parser.parse(response, ns)));
         },
         error: function (collection, error) {
