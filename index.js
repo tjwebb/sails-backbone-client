@@ -11,9 +11,9 @@ var anchorRules = _.transform(require('anchor/lib/match/rules'), function (rules
   };
 });
 
-var Backbone = global.Backbone || (global.Backbone = require('backbone'));
+Backbone || (Backbone = require('backbone'));
+Backbone.Validation = require('backbone-validation');
 require('backbone-relational');
-require('backbone-validation');
 
 module.exports = {
   /**
