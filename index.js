@@ -54,6 +54,7 @@ module.exports = {
     return new Promise(function (resolve, reject) {
       models.fetch({
         success: function (collection, response) {
+          console.log('create fetch response arguments:', arguments);
           resolve(_.extend(ns, parser.parse(response, ns)));
         },
         error: function (collection, error) {
