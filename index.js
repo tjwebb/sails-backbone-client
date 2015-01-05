@@ -58,6 +58,7 @@ module.exports = {
           resolve(_.extend(ns, parser.parse(response, ns)));
         },
         error: function (collection, error) {
+          console.log('create fetch error response:', arguments);
           reject(new Error(JSON.stringify(error)));
         }
       });
