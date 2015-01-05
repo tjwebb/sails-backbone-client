@@ -10,6 +10,9 @@ node_js:
 services:
   - redis-server
 
+before_script:
+  - node --v8-options | grep -B0 -A1 stack_size
+
 env:
   global:
     - REDIS_URL=redis://:@localhost:6379
