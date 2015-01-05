@@ -1,5 +1,9 @@
 'use strict';
 
+process.on('uncaughtException', function(err) {
+  console.log(err.stack);
+});
+
 var assert = require('assert');
 var path = require('path');
 var SailsApp = require('sails').Sails;
