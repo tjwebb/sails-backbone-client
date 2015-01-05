@@ -1,7 +1,8 @@
 'use strict';
 
 process.on('uncaughtException', function(err) {
-  console.log(err.stack);
+  console.trace('uncaughtException');
+  console.log('uncaughtException:', err.stack);
 });
 
 var assert = require('assert');
