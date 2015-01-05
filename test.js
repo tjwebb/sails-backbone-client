@@ -2,7 +2,7 @@
 
 process.on('uncaughtException', function(err) {
   console.trace('uncaughtException');
-  console.log('uncaughtException:', err.stack);
+  console.log('uncaughtException:', err);
 });
 
 var assert = require('assert');
