@@ -35,6 +35,6 @@
     "hashware-api": "latest",
     "mocha": "^1.21.5",
     "sails": "^0.10.5",
-    "xtuple-api": "latest"
+    "hashware-api": "latest"
   }
 }

@@ -11,6 +11,23 @@ var anchorRules = _.transform(require('anchor/lib/match/rules'), function (rules
   };
 });
 
+var associationRules = function (ns) {
+  return {
+    model: function (value, attr, model, obj, json) {
+      if (value === null || _.isNumber(value)) return;
+      if (!obj instanceof ns._lower[model]) {
+        return 'association ('+ attr +') not instance of '+ model;
+      }
+    },
+    collection: function (value, attr, collection, obj, json) {
+      if (value === null || _.isNumber(value)) return;
+      if (!obj instanceof ns._lower[model]) {
+        return 'association ('+ attr +') not instance of '+ collection;
+      }
+    }
+  };
+};
+
 Backbone || (Backbone = require('backbone'));
 Backbone.Validation = require('backbone-validation');
 require('backbone-relational');
@@ -28,7 +45,7 @@ module.exports = {
     Backbone.Relational.showWarnings = false;
     Backbone.Relational.store.addModelScope(ns);
 
-    _.extend(Backbone.Validation.validators, anchorRules);
+    _.extend(Backbone.Validation.validators, anchorRules, associationRules(ns));
     _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
 
     var ModelCollection = Backbone.Collection.extend({ url: _url });
