@@ -53,18 +53,21 @@ module.exports = {
 
     return new Promise(function (resolve, reject) {
       console.trace('inside promise');
-      models.fetch({
-        success: function (collection, response) {
-          console.log('create fetch response arguments:', arguments);
-          resolve(_.extend(ns, parser.parse(response, ns)));
-        },
-        error: function (collection, error) {
-          console.log('create fetch error response:', arguments);
-          reject(new Error(error.message));
-          //reject(new Error(JSON.stringify(error)));
-        }
+      process.nextTick(function () {
+        models.fetch({
+          success: function (collection, response) {
+            console.log('create fetch response arguments:', arguments);
+            var parsed = _.extend(ns, parser.parse(response, ns)));
+            resolve(parsed);
+          },
+          error: function (collection, error) {
+            console.log('create fetch error response:', arguments);
+            reject(new Error(error.message));
+            //reject(new Error(JSON.stringify(error)));
+          }
+        });
+        console.trace('after fetch');
       });
-      console.trace('after fetch');
     });
   }
 };
