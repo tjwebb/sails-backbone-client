@@ -1,6 +1,6 @@
 {
   "name": "sails-backbone-client",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Load a Sails Backbone API in the Browser",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,6 @@
     "backbone.ajax": "^1.1.4",
     "hashware-api": "latest",
     "mocha": "^1.21.5",
-    "sails": "^0.10.5",
-    "hashware-api": "latest"
+    "sails": "^0.10.5"
   }
 }
