@@ -60,8 +60,7 @@ describe('sails-backbone-client', function () {
           done();
         })
         .catch(function (error) {
-          console.error(error.stack);
-          console.trace();
+          console.trace('describe create catch');
           done(error);
         });
 

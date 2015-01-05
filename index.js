@@ -42,6 +42,8 @@ module.exports = {
     _.isObject(ns) || (ns = { });
     ns.url = url.parse(_url);
 
+    console.trace('create 1');
+
     Backbone.Relational.showWarnings = false;
     Backbone.Relational.store.addModelScope(ns);
 
@@ -51,7 +53,9 @@ module.exports = {
     var ModelCollection = Backbone.Collection.extend({ url: _url });
     var models = new ModelCollection();
 
+    console.trace('create 2');
     return new Promise(function (resolve, reject) {
+      console.trace('inside promise');
       models.fetch({
         success: function (collection, response) {
           console.log('create fetch response arguments:', arguments);
@@ -59,7 +63,8 @@ module.exports = {
         },
         error: function (collection, error) {
           console.log('create fetch error response:', arguments);
-          reject(new Error(JSON.stringify(error)));
+          reject(new Error(error.message));
+          //reject(new Error(JSON.stringify(error)));
         }
       });
     });
