@@ -53,6 +53,7 @@ module.exports = {
 
     return new Promise(function (resolve, reject) {
       console.trace('inside promise');
+      /*
       process.nextTick(function () {
         models.fetch({
           success: function (collection, response) {
@@ -68,6 +69,7 @@ module.exports = {
         });
         console.trace('after fetch');
       });
+      */
     });
   }
 };
