@@ -10,6 +10,8 @@ var SailsApp = require('sails').Sails;
 var _ = require('lodash');
 var BackboneClient;
 
+//Promise.longStackTraces();
+
 describe('sails-backbone-client', function () {
   var url = 'http://localhost:1337/api/v1/backbonemodel';
   var schema;
@@ -58,7 +60,7 @@ describe('sails-backbone-client', function () {
           done();
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error.stack);
           console.trace();
           done(error);
         });

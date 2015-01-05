@@ -1,7 +1,7 @@
 language: node_js
 
 # use docker (http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure)
-#sudo: false
+sudo: false
 
 node_js:
   - '0.10'
@@ -13,6 +13,7 @@ services:
 env:
   global:
     - REDIS_URL=redis://:@localhost:6379
+    - BLUEBIRD_DEBUG=1
 
 notifications:
   email: false
