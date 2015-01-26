@@ -21,16 +21,12 @@ var associationRules = function (ns) {
     },
     collection: function (value, attr, collection, obj, json) {
       if (value === null || _.isNumber(value)) return;
-      if (!obj instanceof ns._lower[model]) {
+      if (!obj instanceof ns._lower[collection]) {
         return 'association ('+ attr +') not instance of '+ collection;
       }
     }
   };
 };
-
-Backbone || (Backbone = require('backbone'));
-Backbone.Validation = require('backbone-validation');
-require('backbone-relational');
 
 module.exports = {
   /**
@@ -52,21 +48,21 @@ module.exports = {
     var models = new ModelCollection();
 
     return new Promise(function (resolve, reject) {
-      console.trace('inside promise');
+      //console.trace('inside promise');
       process.nextTick(function () {
         models.fetch({
           success: function (collection, response) {
-            console.log('create fetch response arguments:', arguments);
-            //var parsed = _.extend(ns, parser.parse(response, ns));
-            //resolve(parsed);
+            //console.log('create fetch response arguments:', arguments);
+            var parsed = _.extend(ns, parser.parse(response, ns));
+            resolve(parsed);
           },
           error: function (collection, error) {
-            console.log('create fetch error response:', arguments);
+            //console.log('create fetch error response:', arguments);
             //reject(new Error(error.message));
-            //reject(new Error(JSON.stringify(error)));
+            reject(new Error(JSON.stringify(error)));
           }
         });
-        console.trace('after fetch');
+        //console.trace('after fetch');
       });
     });
   }

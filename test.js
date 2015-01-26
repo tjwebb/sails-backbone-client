@@ -1,10 +1,5 @@
 'use strict';
 
-process.on('uncaughtException', function(err) {
-  console.trace('uncaughtException');
-  console.log('uncaughtException:', err);
-});
-
 var assert = require('assert');
 var path = require('path');
 var SailsApp = require('sails').Sails;
@@ -61,11 +56,11 @@ describe('sails-backbone-client', function () {
           done();
         })
         .catch(function (error) {
-          console.trace('describe create catch');
+          //console.trace('describe create catch');
           done(error);
         });
 
-      global.Backbone.Relational.store.addModelScope(hashpanel);
+      //global.Backbone.Relational.store.addModelScope(hashpanel);
     });
     it.skip('should be fast (t < 20ms) * 100', function () {
       this.timeout(2000);
@@ -84,7 +79,7 @@ describe('sails-backbone-client', function () {
     it.skip('should record proper inheritance in the prototype chain', function () {
       //assert(hashpanel.Miner.__super__.name === 'xTupleObject');
       //assert(hashpanel.Country.__super__.name === 'Place');
-      var account = new hashpanel.Miner();
+      //var account = new hashpanel.Miner();
       //assert(account.constructor.__super__.name === 'xTupleObject');
     });
     it('should mixin any existing models of the same name', function () {
