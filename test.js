@@ -37,9 +37,8 @@ describe('sails-backbone-client', function () {
     app.lift(config, function (error, sails) {
       app = sails;
 
-      global.Backbone = require('backbone');
-      global.Backbone.ajax = require('backbone.ajax');
       BackboneClient = require('./');
+      global.Backbone.ajax = require('backbone.ajax');
 
       done(error);
     });
