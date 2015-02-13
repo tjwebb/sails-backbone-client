@@ -28,6 +28,11 @@ describe('sails-backbone-client', function () {
     appPath: path.dirname(require.resolve('hashware-api')),
     hooks: {
       grunt: false
+    },
+    config: {
+      adminUsername: 'admin@hashpanel.io',
+      adminPassword: 'admin1234',
+      adminEmail: 'admin@hashpanel.io'
     }
   };
 
@@ -37,8 +42,9 @@ describe('sails-backbone-client', function () {
     app.lift(config, function (error, sails) {
       app = sails;
 
-      BackboneClient = require('./');
+      global.Backbone = require('backbone');
       global.Backbone.ajax = require('backbone.ajax');
+      BackboneClient = require('./');
 
       done(error);
     });

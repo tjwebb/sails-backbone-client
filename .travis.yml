@@ -11,7 +11,13 @@ services:
   - redis-server
 
 before_script:
-  - node --v8-options | grep -B0 -A1 stack_size
+  - cd node_modules/hashware-api/node_modules/hashware-backbone-client
+  - npm link ../../../../
+  - cd ../../../../
+
+  - cd node_modules/hashware-api/node_modules/sails-backbone
+  - npm link ../../../../
+  - cd ../../../../
 
 env:
   global:
