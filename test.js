@@ -6,8 +6,6 @@ var SailsApp = require('sails').Sails;
 var _ = require('lodash');
 var BackboneClient;
 
-//Promise.longStackTraces();
-
 describe('sails-backbone-client', function () {
   var url = 'http://localhost:1337/api/v1/backbonemodel';
   var schema;
@@ -39,7 +37,6 @@ describe('sails-backbone-client', function () {
   before(function (done) {
     this.timeout(60 * 1000);
 
-    //global.Backbone = require('backbone');
     BackboneClient = require('./');
     global.Backbone.ajax = require('backbone.ajax');
 
