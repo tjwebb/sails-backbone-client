@@ -12,9 +12,12 @@
   },
   "keywords": [
     "sails",
+    "sails.js",
     "backbone",
     "client",
-    "sails-backbone"
+    "sails-backbone",
+    "api",
+    "generator"
   ],
   "author": "Travis Webb <me@traviswebb.com>",
   "license": "MIT",
@@ -23,17 +26,17 @@
   },
   "homepage": "https://github.com/tjwebb/sails-backbone-client",
   "dependencies": {
-    "anchor": "^0.9",
+    "anchor": "^0.10",
     "backbone": "^1.1",
     "backbone-relational": "^0.9",
     "backbone-validation": "^0.9",
     "bluebird": "^2.5",
-    "lodash": "^2.4.1"
+    "lodash": "^3.2"
   },
   "devDependencies": {
     "backbone.ajax": "^1.1.4",
     "hashware-api": "latest",
     "mocha": "^1.21.5",
-    "sails": "^0.10.5"
+    "sails": "^0.11"
   }
 }

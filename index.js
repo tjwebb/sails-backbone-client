@@ -1,6 +1,10 @@
 'use strict';
 
 var _ = require('lodash');
+var Backbone = global.Backbone = require('backbone');
+require('backbone-validation');
+global.Backbone.RelationalModel || require('backbone-relational');
+
 var Promise = require('bluebird');
 var parser = require('./lib/parser');
 var url = require('url');
