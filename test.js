@@ -37,8 +37,9 @@ describe('sails-backbone-client', function () {
   before(function (done) {
     this.timeout(60 * 1000);
 
+    var Backbone = require('backbone');
+    Backbone.ajax = require('backbone.ajax');
     BackboneClient = require('./');
-    global.Backbone.ajax = require('backbone.ajax');
 
     app.lift(config, function (error, sails) {
       app = sails;
