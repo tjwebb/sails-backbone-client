@@ -15,8 +15,8 @@ $ npm install sails-backbone-client --save
 
 ```js
 var BackboneClient = require('sails-backbone-client');
-var api = { };
-BackboneClient.create('localhost:1337/backbonemodel', api)
+var sdk = { };
+BackboneClient.create('localhost:1337/backbonemodel', sdk)
   .then(function (api) {
     api.Account.fetch() // ...
   });
