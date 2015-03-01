@@ -4,7 +4,7 @@
   "description": "Load a Sails Backbone API in the Browser",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "rm -rf .tmp/ && NODE_ENV=test mocha --reporter spec -b"
   },
   "repository": {
     "type": "git",
