@@ -113,12 +113,23 @@ describe('sails-backbone-client', function () {
         active: true
       });
       role.once('validated', function (isValid, model, errors) {
-        assert(isValid);
+        assert(isValid, errors);
         done(_.isEmpty(errors) ? undefined : errors);
       });
       role.validate();
-
-      //role.validate();
+    });
+    it('should invalidate an invalid model using default validators', function (done) {
+      var role = new hashpanel.Role({
+        name: 123,
+        active: true
+      });
+      role.once('validated', function (isValid, model, errors) {
+        assert(_.isObject(errors));
+        assert.equal(errors.name, 'failed "string" validation');
+        //assert(errors.
+        done(_.isEmpty(errors) ? 'should fail invalidation' : undefined);
+      });
+      role.validate();
     });
     it('should validate a valid model with associations', function () {
       var miner = new hashpanel.Miner({
