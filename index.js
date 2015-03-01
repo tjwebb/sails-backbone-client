@@ -48,8 +48,8 @@ module.exports = {
     _.extend(Backbone.Validation.validators, anchorRules, associationRules(ns));
     _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
 
-    var ModelCollection = Backbone.Collection.extend({ url: _url });
-    var models = new ModelCollection();
+    var BackboneModelCollection = Backbone.Collection.extend({ url: _url });
+    var models = new BackboneModelCollection();
 
     return new Promise(function (resolve, reject) {
       //console.trace('inside promise');
@@ -61,9 +61,9 @@ module.exports = {
             resolve(parsed);
           },
           error: function (collection, error) {
-            //console.log('create fetch error response:', arguments);
+            console.log('create fetch error response:', arguments);
             //reject(new Error(error.message));
-            reject(new Error(JSON.stringify(error)));
+            reject(error);
           }
         });
         //console.trace('after fetch');
