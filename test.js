@@ -28,9 +28,11 @@ describe('sails-backbone-client', function () {
       grunt: false
     },
     config: {
-      adminUsername: 'admin@hashpanel.io',
-      adminPassword: 'admin1234',
-      adminEmail: 'admin@hashpanel.io'
+      permissions: {
+        adminUsername: 'admin@hashpanel.io',
+        adminPassword: 'admin1234',
+        adminEmail: 'admin@hashpanel.io'
+      }
     }
   };
 
@@ -54,12 +56,10 @@ describe('sails-backbone-client', function () {
 
       BackboneClient.create(url, ns)
         .then(function (api) {
-          //console.log(api);
           hashpanel = api;
           done();
         })
         .catch(function (error) {
-          //console.trace('describe create catch');
           done(error);
         });
 
@@ -76,14 +76,8 @@ describe('sails-backbone-client', function () {
       assert(_.isObject(account));
     });
     it('should define Collections for the models', function () {
-      assert(new hashpanel.RoleCollection() instanceof global.Backbone.Collection);
-      assert(new hashpanel.MinerCollection() instanceof global.Backbone.Collection);
-    });
-    it.skip('should record proper inheritance in the prototype chain', function () {
-      //assert(hashpanel.Miner.__super__.name === 'xTupleObject');
-      //assert(hashpanel.Country.__super__.name === 'Place');
-      //var account = new hashpanel.Miner();
-      //assert(account.constructor.__super__.name === 'xTupleObject');
+      assert(hashpanel.MinerCollection);
+      assert(hashpanel.MinerDeviceCollection);
     });
     it('should mixin any existing models of the same name', function () {
 
@@ -120,13 +114,11 @@ describe('sails-backbone-client', function () {
       });
       role.once('validated', function (isValid, model, errors) {
         assert(isValid);
-        if (!_.isEmpty(errors)) {
-          return done(new Error(JSON.stringify(errors)));
-        }
-        done();
+        done(_.isEmpty(errors) ? undefined : errors);
       });
-
       role.validate();
+
+      //role.validate();
     });
     it('should validate a valid model with associations', function () {
       var miner = new hashpanel.Miner({

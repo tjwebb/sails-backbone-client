@@ -9,9 +9,23 @@ var Promise = require('bluebird');
 var parser = require('./lib/parser');
 var url = require('url');
 
+var ignoreAttributeValidation = [
+  'createdBy',
+  'createdAt',
+  'updatedAt',
+  'owner',
+  'id'
+];
+
+/**
+ * Hook all waterline anchors; the waterline validators return 'true' when
+ * valid; the backbone.validation validators return undefined.
+ */
 var anchorRules = _.transform(require('anchor/lib/match/rules'), function (rules, rule, name) {
-  rules[name] = function (value) {
-    return rule(value) === true ? undefined : 'failed "' + name + '" validation';
+  rules[name] = function (value, attr, model, obj, json) {
+    if (_.contains(ignoreAttributeValidation, attr)) return;
+
+    return (rule(value) === true) ? undefined : 'failed "' + name + '" validation';
   };
 });
 
