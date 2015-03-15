@@ -66,16 +66,14 @@ module.exports = {
     var models = new BackboneModelCollection();
 
     return new Promise(function (resolve, reject) {
-      process.nextTick(function () {
-        models.fetch({
-          success: function (collection, response) {
-            var parsed = _.extend(ns, parser.parse(response, ns));
-            resolve(parsed);
-          },
-          error: function (collection, error) {
-            reject(error);
-          }
-        });
+      models.fetch({
+        success: function (collection, response) {
+          var parsed = _.extend(ns, parser.parse(response, ns));
+          resolve(parsed);
+        },
+        error: function (collection, error) {
+          reject(error);
+        }
       });
     });
   }
