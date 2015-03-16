@@ -2,8 +2,10 @@
 
 var _ = require('lodash');
 var Backbone = require('backbone');
-require('backbone-validation');
+Backbone.$ = require('jquery');
 require('backbone-relational');
+require('backbone-validation');
+console.log(Backbone);
 
 var Promise = require('bluebird');
 var parser = require('./lib/parser');
