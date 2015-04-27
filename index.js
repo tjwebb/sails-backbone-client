@@ -1,8 +1,9 @@
-'use strict';
+//'use strict';
+
 
 var _ = require('lodash');
 var Backbone = require('backbone');
-Backbone.$ = require('jquery');
+Backbone.$ = global.$ || require('jquery');
 require('backbone-relational');
 require('backbone-validation');
 
@@ -73,6 +74,7 @@ module.exports = {
           resolve(parsed);
         },
         error: function (collection, error) {
+          console.log(arguments);
           reject(error);
         }
       });
