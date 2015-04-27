@@ -5,7 +5,6 @@ var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 require('backbone-relational');
 require('backbone-validation');
-console.log(Backbone);
 
 var Promise = require('bluebird');
 var parser = require('./lib/parser');
