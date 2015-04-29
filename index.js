@@ -58,8 +58,7 @@ module.exports = {
     ns.url = url.parse(_url);
 
     Backbone.Relational.showWarnings = false;
-    Backbone.Relational.store.addModelScope(ns);
-    ns.store = Backbone.Relational.store;
+    Backbone.Relational.store.removeModelScope(global);
 
     _.extend(Backbone.Validation.validators, anchorRules, associationRules(ns));
     _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
@@ -70,8 +69,10 @@ module.exports = {
     return new Promise(function (resolve, reject) {
       models.fetch({
         success: function (collection, response) {
-          var parsed = _.extend(ns, parser.parse(response, ns));
-          resolve(parsed);
+          var sdk = _.extend({ }, ns, parser.parse(response, ns));
+          Backbone.Relational.store.addModelScope(sdk);
+          sdk.store = Backbone.Relational.store;
+          resolve(sdk);
         },
         error: function (collection, error) {
           reject(error);
