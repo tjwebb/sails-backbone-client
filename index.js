@@ -1,5 +1,4 @@
-//'use strict';
-
+'use strict';
 
 var _ = require('lodash');
 var Backbone = require('backbone');
@@ -60,6 +59,7 @@ module.exports = {
 
     Backbone.Relational.showWarnings = false;
     Backbone.Relational.store.addModelScope(ns);
+    ns.store = Backbone.Relational.store;
 
     _.extend(Backbone.Validation.validators, anchorRules, associationRules(ns));
     _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
@@ -74,7 +74,6 @@ module.exports = {
           resolve(parsed);
         },
         error: function (collection, error) {
-          console.log(arguments);
           reject(error);
         }
       });
